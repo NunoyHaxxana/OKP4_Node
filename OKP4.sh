@@ -343,7 +343,7 @@ break
             echo -e '\e[1m\e[32mYou choose Install with Snapshort ...\e[0m' && sleep 1
 InstallingRequiredtool
 InstallingGo
-Installingokp4
+InstallingOKP4
 Createwallet
 SetchainID
 Setupgenesis
@@ -361,7 +361,7 @@ echo -e "\e[1m\e[32mYour Node was Install!\e[0m" && sleep 1
             echo -e '\e[1m\e[32mYou choose Install with Snapshort ...\e[0m' && sleep 1
 InstallingRequiredtool
 InstallingGo
-Installingokp4
+InstallingOKP4
 Recoverwallet
 SetchainID
 Setupgenesis
