@@ -33,7 +33,7 @@ if ! command -v go > /dev/null; then
 else
   echo "Go is already installed"
 fi
-rm "go1.18.2.linux-amd64.tar.gz"
+
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
 source ~/.bash_profile
 }
@@ -88,18 +88,42 @@ fi
 
 function SetchainID {
 echo " "
-echo -e "\e[1m\e[32mSet chain id mocha and keyring-backend test... \e[0m" && sleep 1
+echo -e "\e[1m\e[32mSet chain id okp4-nemeton-1 and keyring-backend test... \e[0m" && sleep 1
 source $HOME/.bash_profile
 okp4d config keyring-backend test
 okp4d config chain-id okp4-nemeton-1
-okp4d init ${OKP4NODENAME} --chain-id okp4-nemeton-1 && sleep 2
+okp4d init ${OKP4NODENAME} --chain-id okp4-nemeton-1 && sleep 1
 }
 
 
 function SetupGenesis  {
 echo " "
 echo -e "\e[1m\e[32mDownload Genesis.json... \e[0m" && sleep 1
-curl https://raw.githubusercontent.com/okp4/networks/main/chains/nemeton-1/genesis.json > $HOME/.okp4d/config/genesis.json
+curl -o $HOME/.okp4d/config/genesis.json https://raw.githubusercontent.com/okp4/networks/main/chains/nemeton-1/genesis.json
+}
+
+
+function CustomPort  {
+echo " "
+sudo sed -i '/OKP4_PORT/d' $HOME/.bash_profile
+echo -e "\e[1m\e[32mCustom You Port... \e[0m" && sleep 1
+while true; do
+  read -p "Insert Port 10-99: " OKP4_PORT
+  if [[ $OKP4_PORT =~ ^[1-9][0-9]$ ]]; then
+    # Port number is valid
+    break
+  else
+    # Port number is invalid
+    echo "Error: Please enter a number between 10 and 99."
+  fi
+done
+
+echo "Port: $OKP4_PORT"
+echo 'export OKP4_PORT='${OKP4_PORT} >> $HOME/.bash_profile
+source $HOME/.bash_profile
+sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${OKP4_PORT}658\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:${OKP4_PORT}657\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${OKP4_PORT}060\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${OKP4_PORT}656\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${OKP4_PORT}660\"%" $HOME/.okp4d/config/config.toml
+sed -i.bak -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:${OKP4_PORT}17\"%; s%^address = \":8080\"%address = \":${OKP4_PORT}80\"%; s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:${OKP4_PORT}90\"%; s%^address = \"0.0.0.0:9091\"%address = \"0.0.0.0:${OKP4_PORT}91\"%; s%^address = \"0.0.0.0:8545\"%address = \"0.0.0.0:${OKP4_PORT}45\"%; s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:${OKP4_PORT}46\"%" $HOME/.okp4d/config/app.toml
+sed -i.bak -e "s%^node = \"tcp://localhost:26657\"%node = \"tcp://localhost:${OKP4_PORT}657\"%" $HOME/.okp4d/config/client.toml 
 }
 
 
@@ -128,56 +152,52 @@ sudo systemctl start okp4d
 function Setpruning {
 echo " "
 echo -e "\e[1m\e[32mSet Pruning... \e[0m" && sleep 1
-sed -i 's|pruning = "default"|pruning = "custom"|g' $HOME/.okp4d/config/app.toml
-sed -i 's|pruning-keep-recent = "0"|pruning-keep-recent = "100"|g' $HOME/.okp4d/config/app.toml
-sed -i 's|pruning-interval = "0"|pruning-interval = "17"|g' $HOME/.okp4d/config/app.toml
+sed -i.bak -e 's|^pruning *=.*|pruning = "custom"|; s|^pruning-keep-recent *=.*|pruning-keep-recent = "100"|; s|^pruning-keep-every *=.*|pruning-keep-every = "0"|; s|^pruning-interval *=.*|pruning-interval = "17"|' $HOME/.okp4d/config/app.toml
 }
 
 
 function Recoverwallet {
 echo " "
 if [ ! $OKP4NODENAME ]; then
-while true; do
-  read -p "Insert node name: " OKP4NODENAME
-  if [[ $OKP4NODENAME =~ ^[a-zA-Z0-9]+$ ]]; then
-    break
-  else
-    echo "Error: Please enter only text and numbers."
-  fi
-done
-echo 'export OKP4NODENAME='$OKP4NODENAME >> $HOME/.bash_profile
+  while true; do
+    read -p "Insert node name: " OKP4NODENAME
+    if [[ $OKP4NODENAME =~ ^[a-zA-Z0-9]+$ ]]; then
+      break
+    else
+      echo "Error: Please enter only text and numbers."
+    fi
+  done
+  echo 'export OKP4NODENAME='$OKP4NODENAME >> $HOME/.bash_profile
 fi
 echo " "
 
 if [ ! $OKP4WALLET ]; then
-while true; do
-  read -p "Insert wallet name: " OKP4WALLET
-  if [[ $OKP4WALLET =~ ^[a-zA-Z0-9]+$ ]]; then
-    break
-  else
-    echo "Error: Please enter only text and numbers."
-  fi
-done
-echo 'export OKP4WALLET='${OKP4WALLET} >> $HOME/.bash_profile
+  while true; do
+    read -p "Insert wallet name: " OKP4WALLET
+    if [[ $OKP4WALLET =~ ^[a-zA-Z0-9]+$ ]]; then
+      break
+    else
+      echo "Error: Please enter only text and numbers."
+    fi
+  done
+  echo 'export OKP4WALLET='${OKP4WALLET} >> $HOME/.bash_profile
 fi
+
 echo " "
 
-source $HOME/.bash_profile
-okp4d config chain-id mocha
-okp4d config keyring-backend test
-sed -i.bak -e "s/^mode *=.*/mode = \"validator\"/" $HOME/.okp4d/config/config.toml
 
+okp4d config keyring-backend test
+okp4d config chain-id okp4-nemeton-1
+sed -i.bak -e "s/^mode *=.*/mode = \"validator\"/" $HOME/.okp4d/config/config.toml
+source $HOME/.bash_profile
 echo -e "\e[1m\e[31mPlease write you mnemonic phrase. \e[0m" && sleep 1
 echo " "
-source $HOME/.bash_profile && okp4d keys add $OKP4OKP4WALLET --recover
+okp4d keys add $OKP4WALLET --recover
 echo " "
-
-echo -e "\e[1m\e[33mYour okp4 Wallet address : $(okp4d keys show ${OKP4WALLET} -a)\e[0m" && sleep 1
-echo -e "\e[1m\e[34mYour okp4 Validator address : $(okp4d keys show ${OKP4WALLET} --bech val -a)\e[0m" && sleep 1    
+ 
   
 echo 'export OKP4WALLET_ADDRESS='$(okp4d keys show ${OKP4WALLET} -a) >> $HOME/.bash_profile
 echo 'export OKP4VALOPER_ADDRESS='$(okp4d keys show ${OKP4WALLET} --bech val -a) >> $HOME/.bash_profile
-
 }
 
 
@@ -234,8 +254,8 @@ function Checksync {
 echo " "
 echo -e "\e[1m\e[32mCheck you node sync... \e[0m" && sleep 1
 source $HOME/.bash_profile 
-echo -e "\e[1m\e[32mYou node Latest Block is $(okp4d status 2>&1 | jq .SyncInfo.latest_block_height) \e[0m" 
-echo -e "\e[1m\e[32mYou node sync is $(okp4d status 2>&1 | jq .SyncInfo.catching_up) \e[0m" 
+echo -e "\e[1m\e[32mYou node Latest Block is $(curl -s localhost:${OKP4_PORT}657/status | jq .result.sync_info.latest_block_height) \e[0m" 
+echo -e "\e[1m\e[32mYou node sync is $(curl -s localhost:${OKP4_PORT}657/status | jq .result.sync_info.catching_up) \e[0m" 
 }
 
 function Addwallet {
@@ -304,11 +324,15 @@ source $HOME/.bash_profile && okp4d tx staking delegate $OKP4VALOPER_ADDRESS ${C
 function Delete {
 echo " "
 echo -e "\e[1m\e[32mDelete you node ... \e[0m" && sleep 1
-sudo systemctl stop okp4d && sudo systemctl disable okp4d && sudo rm /etc/systemd/system/okp4d.service && sudo systemctl daemon-reload && rm -rf $HOME/.okp4-app && rm -rf $HOME/okp4-app  && rm $(which okp4d) 
+sudo systemctl stop okp4d && sudo systemctl disable okp4d && sudo rm /etc/systemd/system/okp4d.service && sudo systemctl daemon-reload 
+sudo rm -rf $HOME/.okp4d 
+sudo rm -rf $HOME/okp4d  
+sudo rm $(which okp4d)
 sudo sed -i '/OKP4WALLET/d' $HOME/.bash_profile
 sudo sed -i '/OKP4WALLET_ADDRESS/d' $HOME/.bash_profile
 sudo sed -i '/OKP4VALOPER_ADDRESS/d' $HOME/.bash_profile
 sudo sed -i '/OKP4NODENAME/d' $HOME/.bash_profile
+sudo sed -i '/OKP4_PORT/d' $HOME/.bash_profile
 }
 
 
@@ -317,7 +341,7 @@ sudo sed -i '/OKP4NODENAME/d' $HOME/.bash_profile
 
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install" "Install with Snapshot" "Install with old wallet and Snapshot" "Check Sync" "Snapshort" "Check Balance" "Create Validator" "Restart" "Delegate" "Uninstall" "Quit")
+options=("Install" "Install with Snapshot" "Install with old wallet and Snapshot" "Snapshort" "Custom Port" "Check Sync" "Check Balance" "Create Validator" "Restart" "Delegate" "Uninstall" "Quit")
 
 select opt in "${options[@]}"
 do
@@ -329,7 +353,7 @@ InstallingGo
 InstallingOKP4
 Createwallet
 SetchainID
-Setupgenesis
+SetupGenesis
 Setseedsandpeers
 Setpruning
 Setsystemd
@@ -346,7 +370,7 @@ InstallingGo
 InstallingOKP4
 Createwallet
 SetchainID
-Setupgenesis
+SetupGenesis
 Setseedsandpeers
 Setpruning
 Setsystemd
@@ -363,13 +387,15 @@ InstallingRequiredtool
 InstallingGo
 InstallingOKP4
 Recoverwallet
-SetchainID
-Setupgenesis
+SetupGenesis
 Setseedsandpeers
 Setpruning
 Setsystemd
 Syncsnap
 Restart
+source $HOME/.bash_profile
+echo -e "\e[1m\e[33mYour okp4 Wallet address : $(okp4d keys show ${OKP4WALLET} -a)\e[0m" && sleep 1
+echo -e "\e[1m\e[34mYour okp4 Validator address : $(okp4d keys show ${OKP4WALLET} --bech val -a)\e[0m" && sleep 1   
 echo -e "\e[1m\e[32mYour Node was Install!\e[0m" && sleep 1
 
 ;;
@@ -383,6 +409,13 @@ Checksync
 "Check Balance")
             echo -e '\e[1m\e[32mYou choose Check Balance ...\e[0m' && sleep 1
 Checkbalances
+
+
+;;
+
+"Custom Port")
+            echo -e '\e[1m\e[32mYou choose Custom Port ...\e[0m' && sleep 1
+CustomPort
 
 ;;
 
