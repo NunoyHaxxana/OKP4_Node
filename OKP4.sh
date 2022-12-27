@@ -54,8 +54,8 @@ cd $HOME
 
 function installCosmovisor {
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
-mkdir -p ~/.okp4d/cosmovisor/genesis/bin
-mkdir -p ~/.okp4d/cosmovisor/upgrades
+mkdir -p $HOME/.okp4d/cosmovisor/genesis/bin
+mkdir -p $HOME/.okp4d/cosmovisor/upgrades
 cp $HOME/go/bin/okp4d $HOME/.okp4d/cosmovisor/genesis/bin
 }
 
