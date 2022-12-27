@@ -215,24 +215,22 @@ echo " "
 echo -e "\e[1m\e[32mCreate okp4d.service ... \e[0m" && sleep 1
 sudo tee /etc/systemd/system/okp4d.service > /dev/null << EOF
 [Unit]
-Description="okp4d node"
+Description=okp4-testnet node service
 After=network-online.target
-
 [Service]
-User=USER
-ExecStart=/home/USER/go/bin/cosmovisor start
-Restart=always
-RestartSec=3
-LimitNOFILE=4096
+User=$USER
+ExecStart=$(which cosmovisor) run start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+Environment="DAEMON_HOME=$HOME/.okp4d"
 Environment="DAEMON_NAME=okp4d"
-Environment="DAEMON_HOME=/home/USER/.okp4d"
-Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 Environment="UNSAFE_SKIP_BACKUP=true"
-
 [Install]
 WantedBy=multi-user.target
 EOF
+
 
 sudo systemctl daemon-reload
 sudo systemctl enable okp4d
