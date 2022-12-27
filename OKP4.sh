@@ -124,7 +124,7 @@ while true; do
     break
   else
     # Port number is invalid
-    echo "Error: Please enter a number between 10 and 99."
+    echo "Error: Please enter a number between 10 and 55."
   fi
 done
 
