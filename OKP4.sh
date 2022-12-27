@@ -51,6 +51,11 @@ make install
 }
 
 
+
+function installCosmovisor {
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+}
+
 function Createwallet {
 echo " "
 echo -e "\e[1m\e[32mCreate OKP4 Wallet ... \e[0m" && sleep 1
@@ -100,6 +105,7 @@ function SetupGenesis  {
 echo " "
 echo -e "\e[1m\e[32mDownload Genesis.json... \e[0m" && sleep 1
 curl -o $HOME/.okp4d/config/genesis.json https://raw.githubusercontent.com/okp4/networks/main/chains/nemeton-1/genesis.json
+curl -o $HOME/.okp4d/config/addrbook.json https://snapshots.polkachu.com/testnet-addrbook/okp4/addrbook.json 
 }
 
 
@@ -351,6 +357,7 @@ do
 InstallingRequiredtool
 InstallingGo
 InstallingOKP4
+installCosmovisor
 Createwallet
 SetchainID
 SetupGenesis
@@ -368,6 +375,7 @@ break
 InstallingRequiredtool
 InstallingGo
 InstallingOKP4
+installCosmovisor
 Createwallet
 SetchainID
 SetupGenesis
@@ -386,6 +394,7 @@ echo -e "\e[1m\e[32mYour Node was Install!\e[0m" && sleep 1
 InstallingRequiredtool
 InstallingGo
 InstallingOKP4
+installCosmovisor
 Recoverwallet
 SetupGenesis
 Setseedsandpeers
