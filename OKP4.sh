@@ -61,7 +61,7 @@ cp $HOME/go/bin/okp4d $HOME/.okp4d/cosmovisor/genesis/bin
 function Createwallet {
 echo " "
 echo -e "\e[1m\e[32mCreate OKP4 Wallet ... \e[0m" && sleep 1
-source ~/.bash_profile
+source $HOME/.bash_profile
 
 
 if [ ! $OKP4NODENAME ]; then
