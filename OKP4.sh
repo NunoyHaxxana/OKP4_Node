@@ -16,7 +16,6 @@ sleep 1
 
 function InstallingRequiredtool {
 echo -e "\e[1m\e[32mInstalling required tool ... \e[0m" && sleep 1
-sudo apt install curl -y > /dev/null 2>&1
 sudo apt update > /dev/null 2>&1 && apt install git sudo unzip wget -y > /dev/null 2>&1
 sudo apt install curl tar wget vim clang pkg-config libssl-dev jq build-essential git make ncdu -y > /dev/null 2>&1
 }
@@ -54,6 +53,9 @@ make install
 
 function installCosmovisor {
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+mkdir -p ~/.okp4d/cosmovisor/genesis/bin
+mkdir -p ~/.okp4d/cosmovisor/upgrades
+cp $HOME/go/bin/okp4d $HOME/.okp4d/cosmovisor/genesis/bin
 }
 
 function Createwallet {
@@ -212,14 +214,21 @@ echo " "
 echo -e "\e[1m\e[32mCreate okp4d.service ... \e[0m" && sleep 1
 sudo tee /etc/systemd/system/okp4d.service > /dev/null << EOF
 [Unit]
-Description=okp4 Validator Node
+Description="okp4d node"
 After=network-online.target
+
 [Service]
-User=$USER
-ExecStart=$(which okp4d) start
-Restart=on-failure
-RestartSec=10
-LimitNOFILE=10000
+User=USER
+ExecStart=/home/USER/go/bin/cosmovisor start
+Restart=always
+RestartSec=3
+LimitNOFILE=4096
+Environment="DAEMON_NAME=okp4d"
+Environment="DAEMON_HOME=/home/USER/.okp4d"
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
+Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
+Environment="UNSAFE_SKIP_BACKUP=true"
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -334,6 +343,7 @@ sudo systemctl stop okp4d && sudo systemctl disable okp4d && sudo rm /etc/system
 sudo rm -rf $HOME/.okp4d 
 sudo rm -rf $HOME/okp4d  
 sudo rm $(which okp4d)
+sudo rm $HOME/go/bin/okp4d
 sudo sed -i '/OKP4WALLET/d' $HOME/.bash_profile
 sudo sed -i '/OKP4WALLET_ADDRESS/d' $HOME/.bash_profile
 sudo sed -i '/OKP4VALOPER_ADDRESS/d' $HOME/.bash_profile
