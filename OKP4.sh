@@ -340,10 +340,10 @@ function Delete {
 echo " "
 echo -e "\e[1m\e[32mDelete you node ... \e[0m" && sleep 1
 sudo systemctl stop okp4d && sudo systemctl disable okp4d && sudo rm /etc/systemd/system/okp4d.service && sudo systemctl daemon-reload 
-sudo rm -rf $HOME/.okp4d 
-sudo rm -rf $HOME/okp4d  
-sudo rm $(which okp4d)
-sudo rm $HOME/go/bin/okp4d
+sudo rm -rf $HOME/.okp4d > /dev/null 2>&1
+sudo rm -rf $HOME/okp4d  > /dev/null 2>&1
+sudo rm $(which okp4d) > /dev/null 2>&1
+sudo rm $HOME/go/bin/okp4d > /dev/null 2>&1
 sudo sed -i '/OKP4WALLET/d' $HOME/.bash_profile
 sudo sed -i '/OKP4WALLET_ADDRESS/d' $HOME/.bash_profile
 sudo sed -i '/OKP4VALOPER_ADDRESS/d' $HOME/.bash_profile
