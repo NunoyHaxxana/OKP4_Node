@@ -265,6 +265,14 @@ sudo systemctl restart okp4d
 }
 
 
+function Restore {
+echo " "
+echo -e "\e[1m\e[32mRestore config.toml and app.toml ... \e[0m" && sleep 1
+cp $HOME/.okp4d/config/app.toml.bak $HOME/.okp4d/config/app.toml
+cp $HOME/.okp4d/config/config.toml.bak $HOME/.okp4d/config/config.toml
+}
+
+
 function Checksync {
 echo " "
 echo -e "\e[1m\e[32mCheck your node sync... \e[0m" && sleep 1
