@@ -47,6 +47,7 @@ git clone https://github.com/okp4/okp4d.git
 cd okp4d
 git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
 make install
+cd $HOME 
 }
 
 
