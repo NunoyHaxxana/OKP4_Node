@@ -34,7 +34,7 @@ else
 fi
 
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
-source ~/.bash_profile
+source $HOME/.bash_profile
 }
 
 
