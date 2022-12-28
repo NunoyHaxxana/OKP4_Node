@@ -55,8 +55,9 @@ Uninstall OKP4 node
 Exit from menu
 
 
-## 2. Install OKP4 Node and auto download lasted snap short
-Press 2 and enter.
+## 2. Example Install OKP4 Node and auto download lasted snap short
+1) Download and run script
+2) Press 2 and enter.
 
 ![My Video 2](https://user-images.githubusercontent.com/83507970/209662477-bbbc4f2f-a12c-496b-93e1-287ab8875c75.gif)
 
