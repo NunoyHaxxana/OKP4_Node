@@ -185,7 +185,8 @@ okp4d keys add OKP4WALLET
 
 
 ![okp20](https://user-images.githubusercontent.com/83507970/209748287-42a95497-2089-498c-931f-ddfedfef9d37.jpg)
-Please adjusted paramitor of wallet, moniker, identity, details and website match to your values before create validator.
+
+* Please adjusted paramitor of wallet, moniker, identity, details and website match to your values before create validator.
 
 ```
 okp4d tx staking create-validator \
