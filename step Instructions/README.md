@@ -222,35 +222,105 @@ okp4d tx staking create-validator \
 
 Add New Key
 ```
-seid keys add wallet
+okp4d keys add wallet
 ```
 
 Recover Existing Key
 ```
-seid keys add wallet --recover
+okp4d keys add wallet --recover
 ```
 
 List All Keys
 ```
-seid keys list
+okp4d keys list
 ```
 
 Delete Key
 ```
-seid keys delete wallet
+okp4d keys delete wallet
 ```
 
 Export Key (save to wallet.backup)
 ```
-seid keys export wallet
+okp4d keys export wallet
 ```
 
 Import Key
 ```
-seid keys import wallet wallet.backup
+okp4d keys import wallet wallet.backup
 ```
 
 Query Wallet Balance
 ```
-seid q bank balances $(seid keys show wallet -a)
+okp4d q bank balances $(seid keys show wallet -a)
+```
+
+
+### Validator management 👷
+
+Create New Validator
+* Please adjusted paramitor of wallet, moniker, identity, details and website match to your values before create validator.
+
+```
+okp4d tx staking create-validator \
+--amount=1000000uknow \
+--pubkey=$(okp4d tendermint show-validator) \
+--moniker="YOUR_MONIKER_NAME" \
+--identity="YOUR_KEYBASE_ID" \
+--details="YOUR_DETAILS" \
+--website="YOUR_WEBSITE_URL"\
+--chain-id=okp4-nemeton-1 \
+--commission-rate=0.05 \
+--commission-max-rate=0.20 \
+--commission-max-change-rate=0.01 \
+--min-self-delegation=1 \
+--from="YOUR_WALLET" \
+--keyring-backend=test \
+--gas-prices=0.1uknow \
+--gas-adjustment=1.5 \
+--gas=auto \
+-y
+```
+
+Edit Existing Validator
+
+```
+okp4d tx staking edit-validator \
+--moniker="YOUR_MONIKER_NAME" \
+--identity="YOUR_KEYBASE_ID" \
+--details="YOUR_DETAILS" \
+--website="YOUR_WEBSITE_URL"
+--chain-id=okp4-nemeton-1 \
+--commission-rate=0.05 \
+--from="YOUR_WALLET" \
+--keyring-backend=test \
+--gas-prices=0.1uknow \
+--gas-adjustment=1.5 \
+--gas=auto \
+-y
+```
+
+Unjail Validator
+```
+okp4d tx slashing unjail --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Signing Info
+```
+okp4d query slashing signing-info $(okp4d tendermint show-validator)
+```
+
+List All Active Validators
+```
+okp4d q staking validators -oj --limit=3000 | jq '.validators[] | select(.status=="BOND_STATUS_BONDED")' | jq -r '(.tokens|tonumber/pow(10; 6)|floor|tostring) + " \t " + .description.moniker' | sort -gr | nl
+```
+
+List All Inactive Validators
+```
+okp4d q staking validators -oj --limit=3000 | jq '.validators[] | select(.status=="BOND_STATUS_UNBONDED")' | jq -r '(.tokens|tonumber/pow(10; 6)|floor|tostring) + " \t " + .description.moniker' | sort -gr | nl
+```
+
+View Validator Details
+```
+okp4d q staking validator $(okp4d keys show wallet --bech val -a)
 ```
