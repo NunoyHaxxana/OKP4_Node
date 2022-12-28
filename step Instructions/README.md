@@ -324,3 +324,39 @@ View Validator Details
 ```
 okp4d q staking validator $(okp4d keys show wallet --bech val -a)
 ```
+
+### Token management 💲 
+Withdraw Rewards From All Validators
+```
+okp4d tx distribution withdraw-all-rewards --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Withdraw Commission And Rewards From Your Validator
+```
+okp4d tx distribution withdraw-rewards $(okp4d keys show wallet --bech val -a) --commission --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Delegate to yourself
+```
+okp4d tx staking delegate $(okp4d keys show wallet --bech val -a) 1000000uknow --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Delegate to another validator
+```
+okp4d tx staking delegate Valoper_address 1000000uknow --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Redelegate
+```
+okp4d tx staking redelegate $(okp4d keys show wallet --bech val -a) Valoper_address 1000000uknow --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Unbond
+```
+okp4d tx staking unbond $(okp4d keys show wallet --bech val -a) 1000000uknow --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adjustment 1.5 --gas auto -y
+```
+
+Send Token
+```
+okp4d tx bank send wallet Destination_address 1000000uknow --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adj
+```
