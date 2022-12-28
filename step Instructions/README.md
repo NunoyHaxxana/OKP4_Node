@@ -41,7 +41,47 @@ make install
 ![okp5](https://user-images.githubusercontent.com/83507970/209746544-10a32530-64f9-421b-9558-075bc392ad9f.jpg)
 ```
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+
+```
+---
+
+![okp6](https://user-images.githubusercontent.com/83507970/209746798-a4549284-3727-4019-bf09-0e6a542aa95a.jpg)
+```
 mkdir -p $HOME/.okp4d/cosmovisor/genesis/bin
 mkdir -p $HOME/.okp4d/cosmovisor/upgrades
 cp $HOME/go/bin/okp4d $HOME/.okp4d/cosmovisor/genesis/bin
 ```
+
+---
+
+![okp7](https://user-images.githubusercontent.com/83507970/209746974-b9abf6ad-41de-4e39-b030-dbd2c194a2b1.jpg)
+```
+okp4d config keyring-backend test
+okp4d config chain-id okp4-nemeton-1
+```
+
+---
+
+![okp8](https://user-images.githubusercontent.com/83507970/209747091-27176196-ba40-4c71-89cd-9028ad15f040.jpg)
+```
+NODE_MONIKER="YOUR_NODE_MONIKER"
+```
+
+```
+okp4d init ${NODE_MONIKER} --chain-id okp4-nemeton-1
+```
+---
+
+
+![okp9](https://user-images.githubusercontent.com/83507970/209747289-e1ed874a-c45a-4463-9f06-93e64e58f47d.jpg)
+```
+curl -o $HOME/.okp4d/config/genesis.json https://raw.githubusercontent.com/okp4/networks/main/chains/nemeton-1/genesis.json
+```
+---
+
+
+![okp10](https://user-images.githubusercontent.com/83507970/209747349-17f2586b-89f0-4657-84ba-f6cab6e4948f.jpg)
+```
+curl -o $HOME/.okp4d/config/addrbook.json https://snapshots.polkachu.com/testnet-addrbook/okp4/addrbook.json 
+```
+---
