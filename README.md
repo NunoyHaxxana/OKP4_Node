@@ -7,6 +7,13 @@ Get your validator running in minutes by scripts.
 
 ![okp1](https://user-images.githubusercontent.com/83507970/209745250-4c7cbacb-1d3b-46c8-95f3-41e1ca197a3f.jpg)
 
+---
+
+## The script below create a validator node so that we run our commands through this user instead of using the root user, to mitigate any possible security vulnerabilities.
+
+### Note: The commands below should be run as root
+---
+
 
 ## 1. Download and run script
 
