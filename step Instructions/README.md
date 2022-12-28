@@ -177,6 +177,8 @@ sudo journalctl -u okp4d -f --no-hostname -o cat
 
 ![okp19](https://user-images.githubusercontent.com/83507970/209748158-721ea584-f575-4f4d-bc59-6a461cfee396.jpg)
 
+* Please adjusted paramitor of OKP4WALLET match to your values before create wallet.
+
 ```
 okp4d keys add OKP4WALLET
 ```
