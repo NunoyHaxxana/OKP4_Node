@@ -1,6 +1,7 @@
 # Setting up a OKP4 Validator Node
 
-### Setting up your validator node and manage has been easy. Get your validator running in minutes by scripts.
+### Setting up your validator node and manage has been easy. 
+Get your validator running in minutes by scripts.
 
 ![okp0](https://user-images.githubusercontent.com/83507970/209745213-70879411-8be9-47fc-aa0b-e6d8861ef80b.jpg)
 
