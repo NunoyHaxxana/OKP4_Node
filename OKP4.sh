@@ -119,7 +119,7 @@ sudo sed -i '/OKP4_PORT/d' $HOME/.bash_profile
 echo -e "\e[1m\e[32mCustom your Port... \e[0m" && sleep 1
 while true; do
   read -p "Insert Port 10-55: " OKP4_PORT
-  if [[ $OKP4_PORT =~ ^[1-5][0-5]$ ]]; then
+  if [[ $OKP4_PORT =~ ^[1-9]?[0-9]$ ]] && [ $OKP4_PORT -ge 10 ] && [ $OKP4_PORT -le 55 ]; 
     # Port number is valid
     break
   else
