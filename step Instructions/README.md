@@ -360,3 +360,69 @@ Send Token
 ```
 okp4d tx bank send wallet Destination_address 1000000uknow --from wallet --chain-id okp4-nemeton-1 --gas-prices 0.1uknow --gas-adj
 ```
+
+
+### Utility ⚡️ 
+Get Validator Info
+```
+okp4d status 2>&1 | jq .ValidatorInfo
+```
+Get Catching Up
+```
+okp4d status 2>&1 | jq .SyncInfo.catching_up
+```
+Get Latest Height
+```
+okp4d status 2>&1 | jq .SyncInfo.latest_block_height
+```
+Get Peer
+```
+echo $(okp4d tendermint show-node-id)'@'$(curl -s ifconfig.me)':'$(cat $HOME/.okp4d/config/config.toml | sed -n '/Address to listen for incoming connection/{n;p;}' | sed 's/.*://; s/".*//')
+```
+Reset Node
+```
+okp4d tendermint unsafe-reset-all --home $HOME/.okp4d --keep-addr-book
+```
+Remove Node
+```
+sudo systemctl stop okp4d && sudo systemctl disable okp4d && sudo rm /etc/systemd/system/okp4d.service && sudo systemctl daemon-reload && rm -rf $HOME/.okp4d && rm -rf $HOME/okp4d && sudo rm $(which okp4d)
+```
+Get IP Address
+```
+wget -qO- eth0.me
+```
+
+
+### Service Management ⚙️
+Reload Services
+```
+sudo systemctl daemon-reload
+```
+Enable Service
+```
+sudo systemctl enable okp4d
+```
+Disable Service
+```
+sudo systemctl disable okp4d
+```
+Run Service
+```
+sudo systemctl start okp4d
+```
+Stop Service
+```
+sudo systemctl stop okp4d
+```
+Restart Service
+```
+sudo systemctl restart okp4d
+```
+Check Service Status
+```
+sudo systemctl status okp4d
+```
+Check Service Logs
+```
+sudo journalctl -u okp4d -f --no-hostname -o cat
+```
