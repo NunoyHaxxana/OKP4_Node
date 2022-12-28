@@ -17,7 +17,6 @@ wget -q -O OKP4.sh https://raw.githubusercontent.com/NunoyHaxxana/OKP4_Node/main
 ![My Video](https://user-images.githubusercontent.com/83507970/209659099-75e3517e-1262-492e-9696-2c28e1b352a9.gif)
 
 ### 1) Install     
-![okp4](https://user-images.githubusercontent.com/83507970/209745514-37023d52-8008-4204-b13c-3f0ac217e7a8.jpg)
 
 Auto install OKP4 lasted version and crerate wallet. with out download snap short.
 
