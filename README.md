@@ -2,6 +2,11 @@
 
 ### Setting up your validator node and manage has been easy. Get your validator running in minutes by scripts.
 
+![okp0](https://user-images.githubusercontent.com/83507970/209745213-70879411-8be9-47fc-aa0b-e6d8861ef80b.jpg)
+
+![okp1](https://user-images.githubusercontent.com/83507970/209745250-4c7cbacb-1d3b-46c8-95f3-41e1ca197a3f.jpg)
+
+
 ## 1. Download and run script
 
 ```
@@ -12,6 +17,8 @@ wget -q -O OKP4.sh https://raw.githubusercontent.com/NunoyHaxxana/OKP4_Node/main
 ![My Video](https://user-images.githubusercontent.com/83507970/209659099-75e3517e-1262-492e-9696-2c28e1b352a9.gif)
 
 ### 1) Install     
+![okp4](https://user-images.githubusercontent.com/83507970/209745514-37023d52-8008-4204-b13c-3f0ac217e7a8.jpg)
+
 Auto install OKP4 lasted version and crerate wallet. with out download snap short.
 
 ### 2) Install with Snapshot          
