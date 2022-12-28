@@ -44,7 +44,7 @@ Auto install OKP4 lasted version and recover your wallet from Existing Key. with
 
 ![okp28](https://user-images.githubusercontent.com/83507970/209793101-5bf7e171-888c-459f-8565-fc0c259cf92d.jpg) 
 
-Download snap short
+Download latest snapshot
 
 ---
 
@@ -68,13 +68,13 @@ Query wallet balance
 
 ![okp32](https://user-images.githubusercontent.com/83507970/209793143-1afec47c-1557-4280-ad42-1a363f815cfc.jpg)
 
-Create new validator
+Auto Create new validator from your paramitor insert on script
 
 ---
 
 ![okp33](https://user-images.githubusercontent.com/83507970/209793155-3cbcecc7-b917-4ca5-8d61-60d3ea130758.jpg)
 
-Restart OKP4 service
+Restart the service OKP4
 
 ---
 
@@ -86,7 +86,7 @@ Auto Delegate Token from youe wallet to your validator node
 
 ![okp35](https://user-images.githubusercontent.com/83507970/209793171-b2b2b1e4-8fa5-4b72-93ef-e370460b81bf.jpg)
 
-Uninstall OKP4 node
+Uninstall OKP4 node from your server
 
 ---
 
