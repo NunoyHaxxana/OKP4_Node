@@ -211,3 +211,46 @@ okp4d tx staking create-validator \
 -y
 ```
 ---
+
+
+
+![okp21](https://user-images.githubusercontent.com/83507970/209748568-285571ef-45fa-4c07-be89-29f8627036a7.jpg)
+
+* Basic commands for node operators
+
+### Key management 🔑
+
+Add New Key
+```
+seid keys add wallet
+```
+
+Recover Existing Key
+```
+seid keys add wallet --recover
+```
+
+List All Keys
+```
+seid keys list
+```
+
+Delete Key
+```
+seid keys delete wallet
+```
+
+Export Key (save to wallet.backup)
+```
+seid keys export wallet
+```
+
+Import Key
+```
+seid keys import wallet wallet.backup
+```
+
+Query Wallet Balance
+```
+seid q bank balances $(seid keys show wallet -a)
+```
