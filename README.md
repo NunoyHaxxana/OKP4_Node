@@ -24,43 +24,77 @@ wget -q -O OKP4.sh https://raw.githubusercontent.com/NunoyHaxxana/OKP4_Node/main
 
 ![My Video](https://user-images.githubusercontent.com/83507970/209659099-75e3517e-1262-492e-9696-2c28e1b352a9.gif)
 
-### 1) Install     
+![okp25](https://user-images.githubusercontent.com/83507970/209792953-d3476d78-22b7-47b7-81fd-feb03eaa7a95.jpg)
+ 
+Auto install OKP4 lasted version and crerate wallet. with out download snap short
 
-Auto install OKP4 lasted version and crerate wallet. with out download snap short.
+---
 
-### 2) Install with Snapshot          
-Auto install OKP4 lasted version and crerate wallet. with download snap short.
+![okp26](https://user-images.githubusercontent.com/83507970/209793058-652e8349-afe7-4729-9dff-a59a2e009bc6.jpg)      
 
-### 3) Install with old wallet and Snapshot     
-Auto install OKP4 lasted version and recover your wallet from Existing Key. with download snap short.
+Auto install OKP4 lasted version and crerate wallet. with download snap short
 
-### 4) Snapshort   
-Download snap short.
+---
 
-### 5) Custom Port 
+![okp27](https://user-images.githubusercontent.com/83507970/209793081-088ac168-570a-4abc-a656-71c8dbcfd1fb.jpg)  
+
+Auto install OKP4 lasted version and recover your wallet from Existing Key. with download snap short
+
+---
+
+![okp28](https://user-images.githubusercontent.com/83507970/209793101-5bf7e171-888c-459f-8565-fc0c259cf92d.jpg) 
+
+Download snap short
+
+---
+
+![okp29](https://user-images.githubusercontent.com/83507970/209793115-a61fe4f5-05d8-472b-8cb1-e10d9e6e903a.jpg)
+
 Change your port on app.toml and client.toml
 
-### 6) Check Sync  
+---
+
+![okp30](https://user-images.githubusercontent.com/83507970/209793126-57858129-4c4c-443b-960d-2fd08d679239.jpg)
+
 Query node block sync 
 
-### 7) Check Balance  
+---
+
+![okp31](https://user-images.githubusercontent.com/83507970/209793134-1cdd51cf-7ca4-48c7-bc3e-ec0ee837ebc8.jpg) 
+
 Query wallet balance
 
-### 8) Create Validator
+---
+
+![okp32](https://user-images.githubusercontent.com/83507970/209793143-1afec47c-1557-4280-ad42-1a363f815cfc.jpg)
+
 Create new validator
 
-### 9) Restart 
+---
+
+![okp33](https://user-images.githubusercontent.com/83507970/209793155-3cbcecc7-b917-4ca5-8d61-60d3ea130758.jpg)
+
 Restart OKP4 service
 
-### 10) Delegate
+---
+
+![okp34](https://user-images.githubusercontent.com/83507970/209793167-e2209d21-523f-4918-ab45-5ca11d586159.jpg)
+
 Auto Delegate Token from youe wallet to your validator node
 
-### 11) Uninstall
+---
+
+![okp35](https://user-images.githubusercontent.com/83507970/209793171-b2b2b1e4-8fa5-4b72-93ef-e370460b81bf.jpg)
+
 Uninstall OKP4 node
 
-### 12) Quit
+---
+
+![okp36](https://user-images.githubusercontent.com/83507970/209793179-4ef1f887-df2d-469f-b414-8874d47490d8.jpg)
+
 Exit from menu
 
+---
 
 ## 2. Example Install OKP4 Node and auto download lasted snap short
 1) Download and run script
