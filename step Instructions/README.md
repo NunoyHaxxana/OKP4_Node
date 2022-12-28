@@ -63,8 +63,9 @@ okp4d config chain-id okp4-nemeton-1
 ---
 
 ![okp8](https://user-images.githubusercontent.com/83507970/209747091-27176196-ba40-4c71-89cd-9028ad15f040.jpg)
+* Please adjusted paramitor of YOUR_MONIKER_NAME match to your NODE NAME.
 ```
-NODE_MONIKER="YOUR_NODE_MONIKER"
+NODE_MONIKER="YOUR_MONIKER_NAME"
 ```
 
 ```
